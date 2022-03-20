@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { Counter } from "./app";
-import { Timer } from "./app";
+import { BreakLength, SessionLength } from "./app";
 
 function App() {
-  const [breakTime, setBreakTime] = useState(5);
-  const [sessionTime, setSessionTime] = useState(25);
-
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-8">
       <div className="flex items-center gap-4 mb-3">
@@ -15,19 +11,8 @@ function App() {
       </div>
 
       <div className="flex gap-52">
-        <Timer
-          title="Break length"
-          time={breakTime}
-          onDecrement={() => setBreakTime((t) => t - 1)}
-          onIncrement={() => setBreakTime((t) => t + 1)}
-        />
-        <Timer
-          title="Session length"
-          time={sessionTime}
-          onDecrement={() => setSessionTime((t) => t - 1)}
-          onIncrement={() => setSessionTime((t) => t + 1)}
-          isSession
-        />
+        <BreakLength />
+        <SessionLength />
       </div>
 
       <Counter />
