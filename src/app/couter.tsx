@@ -1,17 +1,52 @@
-import { FaPlay } from "react-icons/fa";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { FaPlay, FaPause } from "react-icons/fa";
 
 const Counter = () => {
+  const [time, setTime] = useState("01:00");
+  const [isRunning, setIsRunning] = useState(false);
+  const Icon = useMemo(() => (isRunning ? FaPause : FaPlay), [isRunning]);
+
+  const addZero = useCallback((n) => (n < 10 ? `0${n}` : n), []);
+  const handleReset = useCallback(() => {
+    setTime("01:00");
+    setIsRunning(false);
+  }, []);
+
+  useEffect(() => {
+    if (isRunning) {
+      const interval = setInterval(() => {
+        const [minutes, seconds] = time.split(":").map((t) => parseInt(t));
+        if (seconds === 0) {
+          if (minutes === 0) {
+            setIsRunning(false);
+            return;
+          }
+          setTime(`${addZero(minutes - 1)}:59`);
+        } else {
+          setTime(`${addZero(minutes)}:${addZero(seconds - 1)}`);
+        }
+      }, 500);
+      return () => clearInterval(interval);
+    }
+  }, [time, isRunning, addZero]);
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 mb-4">
       <div className="flex flex-col items-center justify-center w-56 h-56 gap-6 p-2 border-4 border-gray-400 rounded-full">
         <h2 className="mb-1 text-2xl font-extrabold">Session</h2>
-        <strong className="text-5xl font-extrabold">24:56</strong>
+        <strong className="text-5xl font-extrabold">{time}</strong>
       </div>
       <div className="flex items-center gap-4">
-        <div className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700">
-          <FaPlay />
+        <div
+          onClick={() => setIsRunning((r) => !r)}
+          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+        >
+          <Icon />
         </div>
-        <div className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700">
+        <div
+          onClick={handleReset}
+          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6"
