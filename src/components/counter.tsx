@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 import { useRun, useSessionTime } from "../hook";
 
@@ -37,6 +38,7 @@ const Counter = () => {
             const audio = new Audio(alarm);
             audio.play();
             onRunningChange(false);
+            toast.info("It's break time");
             return;
           }
           setTime(`${addZeroAtBeginning(minutes - 1)}:59`);
