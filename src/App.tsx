@@ -1,5 +1,5 @@
-import { Counter } from "./app";
-import { BreakLength, SessionLength } from "./app";
+import { Counter } from "./components";
+import { BreakLength, SessionLength } from "./components";
 
 function App() {
   return (
