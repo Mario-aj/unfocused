@@ -3,7 +3,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 
 type Props = {
   title: string;
-  time?: number;
+  time: number;
   isSession?: boolean;
   onIncrement: () => void;
   onDecrement: () => void;
@@ -15,9 +15,9 @@ const minimumSessionTime = 15;
 const maximumSessionTime = 30;
 
 const Timer = ({
-  time = 5,
+  time,
   title,
-  isSession,
+  isSession = false,
   onDecrement,
   onIncrement,
 }: Props) => {
