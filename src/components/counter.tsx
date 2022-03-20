@@ -1,17 +1,25 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { useRun } from "../hook";
+import { useRun, useSessionTime } from "../hook";
+
+const initialValue = (value: number) => {
+  const newValue = value < 10 ? "0" + value : value;
+
+  return `${newValue}:00`;
+};
 
 const Counter = () => {
   const { onRunningChange, isRunning } = useRun();
-  const [time, setTime] = useState("01:00");
+  const { sessionTime } = useSessionTime();
+  const [time, setTime] = useState(() => initialValue(sessionTime));
   const Icon = useMemo(() => (isRunning ? FaPause : FaPlay), [isRunning]);
 
   const addZero = useCallback((n) => (n < 10 ? `0${n}` : n), []);
+
   const handleReset = useCallback(() => {
-    setTime("01:00");
+    setTime(() => initialValue(sessionTime));
     onRunningChange(false);
-  }, []);
+  }, [sessionTime, onRunningChange]);
 
   useEffect(() => {
     if (isRunning) {
@@ -26,7 +34,7 @@ const Counter = () => {
         } else {
           setTime(`${addZero(minutes)}:${addZero(seconds - 1)}`);
         }
-      }, 500);
+      }, 1000);
       return () => clearInterval(interval);
     }
   }, [time, isRunning, addZero, onRunningChange]);
