@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
+
 import { useRun, useSessionTime } from "../hook";
 
 const alarm = require("../assets/alarm.mp3");
@@ -16,12 +17,16 @@ const Counter = () => {
   const [time, setTime] = useState(() => initialValue(sessionTime));
   const Icon = useMemo(() => (isRunning ? FaPause : FaPlay), [isRunning]);
 
-  const addZero = useCallback((n) => (n < 10 ? `0${n}` : n), []);
+  const addZeroAtBeginning = useCallback((n) => (n < 10 ? `0${n}` : n), []);
 
   const handleReset = useCallback(() => {
     setTime(() => initialValue(sessionTime));
     onRunningChange(false);
   }, [sessionTime, onRunningChange]);
+
+  useEffect(() => {
+    setTime(() => initialValue(sessionTime));
+  }, [sessionTime]);
 
   useEffect(() => {
     if (isRunning) {
@@ -34,14 +39,16 @@ const Counter = () => {
             onRunningChange(false);
             return;
           }
-          setTime(`${addZero(minutes - 1)}:59`);
+          setTime(`${addZeroAtBeginning(minutes - 1)}:59`);
         } else {
-          setTime(`${addZero(minutes)}:${addZero(seconds - 1)}`);
+          setTime(
+            `${addZeroAtBeginning(minutes)}:${addZeroAtBeginning(seconds - 1)}`
+          );
         }
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [time, isRunning, addZero, onRunningChange]);
+  }, [time, isRunning, addZeroAtBeginning, onRunningChange]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 mb-4">
