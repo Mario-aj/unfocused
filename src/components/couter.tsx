@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { useRun } from "../hook";
 
 const Counter = () => {
+  const { onRunningChange, isRunning } = useRun();
   const [time, setTime] = useState("01:00");
-  const [isRunning, setIsRunning] = useState(false);
   const Icon = useMemo(() => (isRunning ? FaPause : FaPlay), [isRunning]);
 
   const addZero = useCallback((n) => (n < 10 ? `0${n}` : n), []);
   const handleReset = useCallback(() => {
     setTime("01:00");
-    setIsRunning(false);
+    onRunningChange(false);
   }, []);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Counter = () => {
         const [minutes, seconds] = time.split(":").map((t) => parseInt(t));
         if (seconds === 0) {
           if (minutes === 0) {
-            setIsRunning(false);
+            onRunningChange(false);
             return;
           }
           setTime(`${addZero(minutes - 1)}:59`);
@@ -28,7 +29,7 @@ const Counter = () => {
       }, 500);
       return () => clearInterval(interval);
     }
-  }, [time, isRunning, addZero]);
+  }, [time, isRunning, addZero, onRunningChange]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 mb-4">
@@ -38,7 +39,7 @@ const Counter = () => {
       </div>
       <div className="flex items-center gap-4">
         <div
-          onClick={() => setIsRunning((r) => !r)}
+          onClick={() => onRunningChange(!isRunning)}
           className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
         >
           <Icon />

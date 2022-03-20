@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useRun } from "../hook";
 
 type Props = {
   title: string;
@@ -21,6 +22,7 @@ const Timer = ({
   onDecrement,
   onIncrement,
 }: Props) => {
+  const { isRunning } = useRun();
   const minimum = useMemo(
     () => (isSession ? minimumSessionTime : minimumBreakTime),
     [isSession]
@@ -40,14 +42,18 @@ const Timer = ({
       <div className="flex items-center gap-4">
         <div
           onClick={() => time > minimum && onDecrement()}
-          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+          className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
+            isRunning && "opacity-50 pointer-events-none"
+          }`}
         >
           <FaMinus />
         </div>
 
         <div
           onClick={() => time < maximum && onIncrement()}
-          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+          className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
+            isRunning && "opacity-50 pointer-events-none"
+          }`}
         >
           <FaPlus />
         </div>
