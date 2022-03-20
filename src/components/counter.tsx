@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useRun, useSessionTime } from "../hook";
 
+const alarm = require("../assets/alarm.mp3");
+
 const initialValue = (value: number) => {
   const newValue = value < 10 ? "0" + value : value;
 
@@ -27,6 +29,8 @@ const Counter = () => {
         const [minutes, seconds] = time.split(":").map((t) => parseInt(t));
         if (seconds === 0) {
           if (minutes === 0) {
+            const audio = new Audio(alarm);
+            audio.play();
             onRunningChange(false);
             return;
           }
