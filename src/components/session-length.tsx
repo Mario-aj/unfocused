@@ -6,7 +6,7 @@ const SessionLength = () => {
 
   return (
     <Timer
-      title="Break length"
+      title="Session length"
       time={sessionTime}
       onDecrement={() => onSessionTimeChange(sessionTime - 1)}
       onIncrement={() => onSessionTimeChange(sessionTime + 1)}
