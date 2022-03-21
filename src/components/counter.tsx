@@ -55,12 +55,16 @@ const Counter = () => {
       </div>
       <div className="flex items-center gap-4">
         <div
+          title="Start/Pause"
+          aria-label="Start/Pause"
           onClick={() => onRunningChange(!isRunning)}
           className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
         >
           <Icon />
         </div>
         <div
+          title="Reset counter"
+          aria-label="Reset button"
           onClick={handleReset}
           className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
         >

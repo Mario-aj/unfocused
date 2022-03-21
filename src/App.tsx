@@ -4,9 +4,9 @@ function App() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-8">
       <div className="flex items-center gap-4 mb-3">
-        <span>====================</span>
+        <span>=================</span>
         <h1 className="text-4xl font-extrabold ">Unfocused</h1>
-        <span>====================</span>
+        <span>=================</span>
       </div>
 
       <div className="flex gap-52">
@@ -16,17 +16,24 @@ function App() {
 
       <Counter />
       <footer className="mt-8">
-        <span>
+        <p className="flex flex-col items-center justify-center gap-2 ">
           Built by{" "}
           <a
+            title="creator"
+            aria-label="creator"
             href="https://github.com/Mario-aj"
             target="_blank"
             rel="noreferrer"
-            className="text-xl transition-all duration-300 hover:underline"
+            className="flex items-center gap-2 text-xl transition-all duration-300 hover:underline"
           >
-            Mário Jorge
+            <img
+              src="https://avatars.githubusercontent.com/u/57181054?v=4"
+              alt="creator's img"
+              width={60}
+              className="rounded-full"
+            />
           </a>
-        </span>
+        </p>
       </footer>
     </div>
   );
