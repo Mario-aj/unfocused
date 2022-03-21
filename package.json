@@ -2,6 +2,7 @@
   "name": "unfocused",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.ts",
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -17,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron:start": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
@@ -38,15 +40,18 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.4",
-    "postcss": "^8.4.12",
-    "tailwindcss": "^3.0.23",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9"
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^10.4.4",
+    "concurrently": "^7.0.0",
+    "electron": "^17.1.2",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23",
+    "wait-on": "^6.0.1"
   }
 }
