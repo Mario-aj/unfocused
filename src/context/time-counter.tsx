@@ -1,5 +1,8 @@
 import { ReactNode, useCallback, useState } from "react";
 import { createContext } from "use-context-selector";
+import { toast } from "react-toastify";
+
+const alarm = require("../assets/alarm.mp3");
 
 type Context = {
   sessionTime: number;
@@ -8,6 +11,7 @@ type Context = {
   onBreakTimeChange: (value: number) => void;
   onSessionTimeChange: (value: number) => void;
   onRunningChange: (value: boolean) => void;
+  onSessionEnds: () => void;
 };
 
 const TimeCounterContext = createContext<Context>({
@@ -17,10 +21,11 @@ const TimeCounterContext = createContext<Context>({
   onBreakTimeChange: () => {},
   onSessionTimeChange: () => {},
   onRunningChange: () => {},
+  onSessionEnds: () => {},
 });
 
 const TimeCounterProvider = ({ children }: { children: ReactNode }) => {
-  const [sessionTime, setSessionTime] = useState(25);
+  const [sessionTime, setSessionTime] = useState(1);
   const [breakTime, setBreakTime] = useState(5);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -36,6 +41,12 @@ const TimeCounterProvider = ({ children }: { children: ReactNode }) => {
     setIsRunning(value);
   }, []);
 
+  const onSessionEnds = useCallback(() => {
+    const audio = new Audio(alarm);
+    audio.play();
+    toast.info("It's break time");
+  }, []);
+
   return (
     <TimeCounterContext.Provider
       value={{
@@ -45,6 +56,7 @@ const TimeCounterProvider = ({ children }: { children: ReactNode }) => {
         onSessionTimeChange,
         isRunning,
         onRunningChange,
+        onSessionEnds,
       }}
     >
       {children}

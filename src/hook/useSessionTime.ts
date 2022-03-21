@@ -11,9 +11,15 @@ const useSessionTime = () => {
     (ctx) => ctx.onSessionTimeChange
   );
 
+  const onSessionEnds = useContextSelector(
+    TimeCounterContext,
+    (ctx) => ctx.onSessionEnds
+  );
+
   return {
     sessionTime,
     onSessionTimeChange,
+    onSessionEnds,
   };
 };
 

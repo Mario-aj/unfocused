@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 import { useRun, useSessionTime } from "../hook";
-
-const alarm = require("../assets/alarm.mp3");
 
 const initialValue = (value: number) => {
   const newValue = value < 10 ? "0" + value : value;
@@ -14,7 +11,7 @@ const initialValue = (value: number) => {
 
 const Counter = () => {
   const { onRunningChange, isRunning } = useRun();
-  const { sessionTime } = useSessionTime();
+  const { sessionTime, onSessionEnds } = useSessionTime();
   const [time, setTime] = useState(() => initialValue(sessionTime));
   const Icon = useMemo(() => (isRunning ? FaPause : FaPlay), [isRunning]);
 
@@ -35,10 +32,8 @@ const Counter = () => {
         const [minutes, seconds] = time.split(":").map((t) => parseInt(t));
         if (seconds === 0) {
           if (minutes === 0) {
-            const audio = new Audio(alarm);
-            audio.play();
             onRunningChange(false);
-            toast.info("It's break time");
+            onSessionEnds();
             return;
           }
           setTime(`${addZeroAtBeginning(minutes - 1)}:59`);
@@ -50,7 +45,7 @@ const Counter = () => {
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [time, isRunning, addZeroAtBeginning, onRunningChange]);
+  }, [time, isRunning, addZeroAtBeginning, onRunningChange, onSessionEnds]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 mb-4">
