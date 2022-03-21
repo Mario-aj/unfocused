@@ -10,7 +10,6 @@ const SessionLength = () => {
       time={sessionTime}
       onDecrement={() => onSessionTimeChange(sessionTime - 1)}
       onIncrement={() => onSessionTimeChange(sessionTime + 1)}
-      isSession
     />
   );
 };

@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+
 import { useRun } from "../hook";
 
 type Props = {
@@ -10,28 +10,8 @@ type Props = {
   onDecrement: () => void;
 };
 
-const minimumBreakTime = 3;
-const maximumBreakTime = 10;
-const minimumSessionTime = 15;
-const maximumSessionTime = 30;
-
-const Timer = ({
-  time,
-  title,
-  isSession = false,
-  onDecrement,
-  onIncrement,
-}: Props) => {
+const Timer = ({ time, title, onDecrement, onIncrement }: Props) => {
   const { isRunning } = useRun();
-  const minimum = useMemo(
-    () => (isSession ? minimumSessionTime : minimumBreakTime),
-    [isSession]
-  );
-
-  const maximum = useMemo(
-    () => (isSession ? maximumSessionTime : maximumBreakTime),
-    [isSession]
-  );
 
   return (
     <div className="flex flex-col items-center gap-2 select-none">
@@ -41,7 +21,7 @@ const Timer = ({
       </span>
       <div className="flex items-center gap-4">
         <div
-          onClick={() => time > minimum && onDecrement()}
+          onClick={() => time > 0 && onDecrement()}
           className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
             isRunning && "opacity-50 pointer-events-none"
           }`}
@@ -50,7 +30,7 @@ const Timer = ({
         </div>
 
         <div
-          onClick={() => time < maximum && onIncrement()}
+          onClick={() => onIncrement()}
           className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
             isRunning && "opacity-50 pointer-events-none"
           }`}

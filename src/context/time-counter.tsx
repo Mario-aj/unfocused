@@ -25,7 +25,7 @@ const TimeCounterContext = createContext<Context>({
 });
 
 const TimeCounterProvider = ({ children }: { children: ReactNode }) => {
-  const [sessionTime, setSessionTime] = useState(1);
+  const [sessionTime, setSessionTime] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
   const [isRunning, setIsRunning] = useState(false);
 
