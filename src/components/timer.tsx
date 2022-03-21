@@ -10,6 +10,9 @@ type Props = {
   onDecrement: () => void;
 };
 
+const className =
+  "flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed";
+
 const Timer = ({ time, title, onDecrement, onIncrement }: Props) => {
   const { isRunning } = useRun();
 
@@ -20,23 +23,21 @@ const Timer = ({ time, title, onDecrement, onIncrement }: Props) => {
         {time}
       </span>
       <div className="flex items-center gap-4">
-        <div
-          onClick={() => time > 0 && onDecrement()}
-          className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
-            isRunning && "opacity-50 pointer-events-none"
-          }`}
+        <button
+          onClick={onDecrement}
+          disabled={isRunning || time <= 1}
+          className={className}
         >
           <FaMinus />
-        </div>
+        </button>
 
-        <div
-          onClick={() => onIncrement()}
-          className={`flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700 ${
-            isRunning && "opacity-50 pointer-events-none"
-          }`}
+        <button
+          onClick={onIncrement}
+          disabled={isRunning}
+          className={className}
         >
           <FaPlus />
-        </div>
+        </button>
       </div>
     </div>
   );
