@@ -5,7 +5,6 @@ import { useRun } from "../hook";
 type Props = {
   title: string;
   time: number;
-  isSession?: boolean;
   onIncrement: () => void;
   onDecrement: () => void;
 };
@@ -24,6 +23,7 @@ const Timer = ({ time, title, onDecrement, onIncrement }: Props) => {
       </span>
       <div className="flex items-center gap-4">
         <button
+          title="Decrement"
           onClick={onDecrement}
           disabled={isRunning || time <= 1}
           className={className}
@@ -32,6 +32,7 @@ const Timer = ({ time, title, onDecrement, onIncrement }: Props) => {
         </button>
 
         <button
+          title="Increment"
           onClick={onIncrement}
           disabled={isRunning}
           className={className}
