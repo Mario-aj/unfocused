@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require("electron");
-
-console.log("Starting electron");
+const isDev = require("electron-is-dev");
+const path = require("path");
 
 const createMainWindow = () => {
   let mainWindow = new BrowserWindow({
@@ -14,12 +14,13 @@ const createMainWindow = () => {
       nodeIntegration: false,
     },
   });
-  const startURL = "http://localhost:3000";
 
-  mainWindow.loadURL(startURL);
+  const appUrl = isDev
+    ? "http://localhost:3000"
+    : `file://${path.join(__dirname, "../build/index.html")}`;
 
+  mainWindow.loadURL(appUrl);
   mainWindow.once("ready-to-show", () => mainWindow.show());
-
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
