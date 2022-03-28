@@ -1,5 +1,5 @@
 import { Timer } from ".";
-import { useSessionTime } from "../hook";
+import { useSessionTime } from "src/hook";
 
 const SessionLength = () => {
   const { sessionTime, onSessionTimeChange } = useSessionTime();

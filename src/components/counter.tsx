@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 
-import { useRun, useSessionTime } from "../hook";
+import { useRun, useSessionTime } from "src/hook";
 
 const initialValue = (value: number) => {
   const newValue = value < 10 ? "0" + value : value;

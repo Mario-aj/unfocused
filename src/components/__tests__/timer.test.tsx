@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Timer from "../timer";
-import { useRun } from "../../hook";
+import Timer from "src/components/timer";
+import { useRun } from "src/hook";
 
-jest.mock("../../hook", () => ({
+jest.mock("src/hook", () => ({
   useRun: jest.fn(),
 }));
 const useRunMock = useRun as jest.Mock;

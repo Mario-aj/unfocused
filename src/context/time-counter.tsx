@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useState } from "react";
 import { createContext } from "use-context-selector";
 import { toast } from "react-toastify";
 
-const alarm = require("../assets/alarm.mp3");
+const alarm = require("src/assets/alarm.mp3");
 
 type Context = {
   sessionTime: number;

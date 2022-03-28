@@ -1,5 +1,5 @@
 import { useContextSelector } from "use-context-selector";
-import { TimeCounterContext } from "../context/time-counter";
+import { TimeCounterContext } from "src/context/time-counter";
 
 const useRun = () => {
   const isRunning = useContextSelector(

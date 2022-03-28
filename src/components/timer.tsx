@@ -1,6 +1,6 @@
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-import { useRun } from "../hook";
+import { useRun } from "src/hook";
 
 type Props = {
   title: string;

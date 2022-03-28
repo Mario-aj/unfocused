@@ -1,5 +1,5 @@
 import { Timer } from ".";
-import { useBreakTime } from "../hook";
+import { useBreakTime } from "src/hook";
 
 const BreakLength = () => {
   const { breakTime, onBreakTimeChange } = useBreakTime();
