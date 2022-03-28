@@ -29,7 +29,7 @@ function App() {
             <img
               src="https://avatars.githubusercontent.com/u/57181054?v=4"
               alt="creator's img"
-              width={60}
+              width={50}
               className="rounded-full"
             />
           </a>
