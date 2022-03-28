@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "main": "electron/main.ts",
+  "homepage": "./",
   "dependencies": {
+    "electron-is": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -16,10 +18,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=/ react-scripts build",
+    "build-electron": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron:start": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+    "electron:start": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "yarn build-electron && electron-builder build --publish never"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +47,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/electron": "^1.6.10",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
@@ -50,8 +55,25 @@
     "autoprefixer": "^10.4.4",
     "concurrently": "^7.0.0",
     "electron": "^17.1.2",
+    "electron-builder": "^22.14.13",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23",
     "wait-on": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.unfocused.maj",
+    "productName": "Unfocused",
+    "files": [
+      "build/**/*",
+      "electron/main.ts",
+      "package.json"
+    ],
+    "extends": null,
+    "linux": {
+      "type": "distribution"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
