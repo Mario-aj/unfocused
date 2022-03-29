@@ -51,11 +51,13 @@ const Counter = () => {
     <div className="flex flex-col items-center justify-center gap-4 mb-4">
       <div className="flex flex-col items-center justify-center w-56 h-56 gap-6 p-2 border-4 border-gray-400 rounded-full">
         <h2 className="mb-1 text-2xl font-extrabold">Session</h2>
-        <strong className="text-5xl font-extrabold">{time}</strong>
+        <strong title="time" className="text-5xl font-extrabold">
+          {time}
+        </strong>
       </div>
       <div className="flex items-center gap-4">
         <button
-          title="Start/Pause"
+          title={isRunning ? "Pause" : "Start"}
           aria-label="Start/Pause"
           onClick={() => onRunningChange(!isRunning)}
           className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer disabled:hover:bg-transparent disabled:active:bg-transparent active:bg-gray-600 hover:bg-gray-700"
