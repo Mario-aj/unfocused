@@ -32,7 +32,6 @@ const Counter = () => {
         const [minutes, seconds] = time.split(":").map((t) => parseInt(t));
         if (seconds === 0) {
           if (minutes === 0) {
-            onRunningChange(false);
             onSessionEnds();
             return;
           }

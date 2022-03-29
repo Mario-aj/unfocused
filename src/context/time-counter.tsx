@@ -42,10 +42,11 @@ const TimeCounterProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const onSessionEnds = useCallback(() => {
+    onRunningChange(false);
     const audio = new Audio(alarm);
     audio.play();
     toast.info("It's break time");
-  }, []);
+  }, [onRunningChange]);
 
   return (
     <TimeCounterContext.Provider
