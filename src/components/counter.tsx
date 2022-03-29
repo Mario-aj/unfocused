@@ -54,19 +54,19 @@ const Counter = () => {
         <strong className="text-5xl font-extrabold">{time}</strong>
       </div>
       <div className="flex items-center gap-4">
-        <div
+        <button
           title="Start/Pause"
           aria-label="Start/Pause"
           onClick={() => onRunningChange(!isRunning)}
-          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer disabled:hover:bg-transparent disabled:active:bg-transparent active:bg-gray-600 hover:bg-gray-700"
         >
           <Icon />
-        </div>
-        <div
+        </button>
+        <button
           title="Reset counter"
           aria-label="Reset button"
           onClick={handleReset}
-          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer active:bg-gray-600 hover:bg-gray-700"
+          className="flex items-center justify-center w-12 h-12 p-2 px-3 transition-all duration-300 border border-white rounded-full cursor-pointer disabled:hover:bg-transparent disabled:active:bg-transparent active:bg-gray-600 hover:bg-gray-700"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Counter = () => {
               clipRule="evenodd"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );
